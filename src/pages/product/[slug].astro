@@ -1,0 +1,179 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAurexProducts, type TechProduct } from '../../lib/store';
+
+export async function getStaticPaths() {
+  const products = await getAurexProducts();
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: TechProduct;
+}
+
+const { product } = Astro.props;
+const primaryImage = product.images[0]?.url || "/images/headphones.jpg";
+const discount = product.compare_at_price
+  ? Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100)
+  : 0;
+
+const installment = Math.round(product.price / 3);
+---
+
+<Layout title={`${product.title} | Aurex Electronics Sri Lanka`} description={product.short_description}>
+  <!-- Breadcrumb -->
+  <div class="bg-[#060a14] border-b border-[#1e293b] py-3 text-xs text-[#64748b]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2">
+      <a href="/" class="hover:text-white">Home</a>
+      <span>/</span>
+      <a href="/products" class="hover:text-white">Hardware</a>
+      <span>/</span>
+      <a href={`/products?category=${product.category_slug}`} class="hover:text-[#38bdf8]">{product.category}</a>
+      <span>/</span>
+      <span class="text-white truncate font-medium">{product.title}</span>
+    </div>
+  </div>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      
+      <!-- Media Gallery -->
+      <div class="space-y-4">
+        <div class="aspect-[4/3] bg-[#0b1220] border border-[#1e293b] rounded-2xl overflow-hidden shadow-2xl">
+          <img
+            id="aurex-main-img"
+            src={primaryImage}
+            alt={product.title}
+            class="w-full h-full object-cover object-center"
+          />
+        </div>
+      </div>
+
+      <!-- Specs & Details -->
+      <div class="space-y-6">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#06b6d4]/10 text-[#38bdf8] border border-[#06b6d4]/30 font-mono">
+              {product.category}
+            </span>
+            <span class="text-xs text-emerald-400 font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Verified Sri Lanka Stock
+            </span>
+          </div>
+
+          <h1 class="font-tech text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+            {product.title}
+          </h1>
+
+          <!-- Reviews & SKU -->
+          <div class="flex items-center gap-4 text-xs text-[#94a3b8] pb-4 border-b border-[#1e293b]">
+            <div class="flex items-center gap-1">
+              <span class="text-amber-400">★</span>
+              <span class="font-bold text-white">{product.rating}</span>
+              <span class="text-[#64748b]">({product.review_count} verified owner ratings)</span>
+            </div>
+            <span>•</span>
+            <span class="font-mono text-[#64748b]">SKU: {product.sku}</span>
+          </div>
+
+          <!-- Price & Installments -->
+          <div class="py-6 space-y-2">
+            <div class="flex items-baseline gap-4">
+              <span class="font-tech text-3xl sm:text-4xl font-black text-white">
+                Rs. {product.price.toLocaleString()}
+              </span>
+              {product.compare_at_price && (
+                <div class="flex items-center gap-2">
+                  <span class="text-sm text-[#64748b] line-through">
+                    Rs. {product.compare_at_price.toLocaleString()}
+                  </span>
+                  <span class="bg-[#06b6d4] text-black text-xs font-extrabold px-2 py-0.5 rounded-sm">
+                    Save {discount}%
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <!-- Installment banner -->
+            <div class="p-3 bg-[#0f172a] rounded-lg border border-[#1e293b] flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="px-1.5 py-0.5 rounded-sm bg-[#8b5cf6] text-white font-bold text-[10px]">Koko</span>
+                <span class="px-1.5 py-0.5 rounded-sm bg-[#10b981] text-black font-bold text-[10px]">Mintpay</span>
+                <span class="text-[#cbd5e1]">Split in 3 months: <strong class="text-white">Rs. {installment.toLocaleString()}/mo</strong></span>
+              </div>
+              <span class="text-[11px] text-emerald-400 font-semibold">0% Interest</span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-xs sm:text-sm text-[#94a3b8] leading-relaxed pb-6 border-b border-[#1e293b]">
+            {product.description}
+          </p>
+
+          <!-- Specifications Table -->
+          {product.specs && product.specs.length > 0 && (
+            <div class="space-y-3 pt-2">
+              <h3 class="font-tech text-xs uppercase tracking-wider text-[#cbd5e1] font-bold">
+                Hardware Specifications
+              </h3>
+              <div class="bg-[#0b1220] border border-[#1e293b] rounded-xl overflow-hidden divide-y divide-[#1e293b]">
+                {product.specs.map(spec => (
+                  <div class="flex justify-between p-3 text-xs">
+                    <span class="text-[#64748b] font-medium">{spec.label}</span>
+                    <span class="text-white font-semibold text-right">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Add to Cart CTAs -->
+          <div class="py-6 space-y-3">
+            <div class="flex items-center gap-4">
+              <button
+                type="button"
+                id="aurex-add-btn"
+                class="flex-grow py-4 bg-[#06b6d4] hover:bg-[#0891b2] text-black font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#06b6d4]/20"
+              >
+                Add To Hardware Cart
+              </button>
+              <a
+                href="/checkout"
+                id="aurex-fast-buy"
+                class="py-4 px-6 bg-[#0f172a] hover:bg-[#1e293b] border border-[#334155] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all"
+              >
+                Fast Checkout
+              </a>
+            </div>
+          </div>
+
+          <!-- Warranty Card -->
+          <div class="bg-[#060a14] p-4 rounded-xl border border-[#1e293b] space-y-2 text-xs text-[#94a3b8]">
+            <div class="flex items-center gap-2 text-white font-bold">
+              <span class="text-[#38bdf8]">🛡</span>
+              <span>{product.warranty}</span>
+            </div>
+            <p class="text-[11px] text-[#64748b]">
+              Includes official manufacturer serial registration, 1-to-1 replacement for hardware failure within 14 days, and coverage at Aurex service hubs in Colombo, Kandy, and Galle.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ product }}>
+    document.getElementById('aurex-add-btn')?.addEventListener('click', () => {
+      window.addToAurexCart(product, 1);
+    });
+
+    document.getElementById('aurex-fast-buy')?.addEventListener('click', () => {
+      window.addToAurexCart(product, 1);
+    });
+  </script>
+</Layout>

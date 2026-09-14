@@ -1,0 +1,107 @@
+---
+import type { TechProduct } from '../lib/store';
+
+interface Props {
+  product: TechProduct;
+}
+
+const { product } = Astro.props;
+const primaryImage = product.images[0]?.url || "/images/headphones.jpg";
+const discount = product.compare_at_price
+  ? Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100)
+  : 0;
+
+const installment = Math.round(product.price / 3);
+---
+
+<div class="group relative flex flex-col bg-[#0b1220] border border-[#1e293b] rounded-xl overflow-hidden hover:border-[#06b6d4]/60 hover:shadow-2xl hover:shadow-[#06b6d4]/10 transition-all duration-300">
+  
+  <!-- Media Preview -->
+  <a href={`/product/${product.slug}`} class="relative block aspect-[4/3] overflow-hidden bg-[#070b14]">
+    <img
+      src={primaryImage}
+      alt={product.title}
+      loading="lazy"
+      class="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+    />
+    
+    <!-- Discount / Badge -->
+    {discount > 0 && (
+      <span class="absolute top-3 left-3 bg-[#06b6d4] text-black text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-md">
+        Save {discount}%
+      </span>
+    )}
+
+    <!-- Category tag -->
+    <span class="absolute bottom-3 left-3 bg-[#050811]/90 backdrop-blur-xs text-[#38bdf8] text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border border-[#1e293b]">
+      {product.category}
+    </span>
+  </a>
+
+  <!-- Details Body -->
+  <div class="p-5 flex flex-col flex-grow justify-between">
+    <div>
+      <!-- Rating & Stock badge -->
+      <div class="flex items-center justify-between text-xs text-[#94a3b8] mb-2">
+        <div class="flex items-center gap-1">
+          <span class="text-amber-400">★</span>
+          <span class="font-bold text-white">{product.rating}</span>
+          <span class="text-[11px] text-[#64748b]">({product.review_count})</span>
+        </div>
+        <span class="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> In Stock
+        </span>
+      </div>
+
+      <!-- Title -->
+      <h3 class="font-tech text-base font-bold text-white line-clamp-2 hover:text-[#38bdf8] transition-colors mb-2">
+        <a href={`/product/${product.slug}`}>
+          {product.title}
+        </a>
+      </h3>
+
+      <p class="text-xs text-[#94a3b8] line-clamp-2 leading-relaxed mb-4">
+        {product.short_description}
+      </p>
+
+      <!-- Key Specs Pill -->
+      {product.specs && product.specs.length > 0 && (
+        <div class="bg-[#0f172a] p-2 rounded-md border border-[#1e293b] mb-4 text-[11px] text-[#cbd5e1] flex items-center justify-between">
+          <span class="text-[#64748b]">{product.specs[0].label}:</span>
+          <span class="font-semibold text-white truncate max-w-[170px]">{product.specs[0].value}</span>
+        </div>
+      )}
+    </div>
+
+    <!-- Pricing & Purchase -->
+    <div class="pt-3 border-t border-[#1e293b] flex items-center justify-between">
+      <div>
+        <div class="flex items-baseline gap-2">
+          <span class="font-tech text-xl font-extrabold text-white">
+            Rs. {product.price.toLocaleString()}
+          </span>
+          {product.compare_at_price && (
+            <span class="text-xs text-[#64748b] line-through">
+              Rs. {product.compare_at_price.toLocaleString()}
+            </span>
+          )}
+        </div>
+        <p class="text-[10px] text-[#38bdf8] font-medium mt-0.5">
+          Or 3x Rs. {installment.toLocaleString()} with Koko
+        </p>
+      </div>
+
+      <!-- Add to cart -->
+      <button
+        type="button"
+        class="bg-[#0f172a] hover:bg-[#06b6d4] text-[#38bdf8] hover:text-black border border-[#334155] hover:border-[#06b6d4] p-2.5 rounded-lg transition-all"
+        aria-label="Add to cart"
+        onclick={`window.addToAurexCart(${JSON.stringify(product)})`}
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v16m8-8H4" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

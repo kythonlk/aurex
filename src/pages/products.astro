@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getAurexProducts } from '../lib/store';
+
+const products = await getAurexProducts();
+const categories = [
+  { name: "All Flagship Hardware", slug: "all" },
+  { name: "Audio & Headphones", slug: "audio-headphones" },
+  { name: "Smart Wearables", slug: "smart-wearables" },
+  { name: "Laptops & Computing", slug: "laptops-computing" },
+];
+---
+
+<Layout title="Hardware Directory | Aurex Sri Lanka">
+  <div class="bg-[#060a14] py-14 border-b border-[#1e293b]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs uppercase tracking-[0.25em] font-mono text-[#06b6d4] font-bold">DIRECTORY & ARCHIVE</span>
+      <h1 class="font-tech text-4xl sm:text-5xl text-white font-black mt-2">
+        Flagship Electronics Catalog
+      </h1>
+      <p class="text-xs text-[#94a3b8] max-w-xl mx-auto mt-3">
+        Engineered for precision and endurance. All devices are factory sealed with 2-Year Official Sri Lanka Warranty.
+      </p>
+    </div>
+  </div>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+      {categories.map((cat) => (
+        <button
+          type="button"
+          class="aurex-cat-tab px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all border border-[#1e293b] bg-[#0b1220] text-[#94a3b8] hover:border-[#06b6d4] hover:text-white"
+          data-slug={cat.slug}
+        >
+          {cat.name}
+        </button>
+      ))}
+    </div>
+
+    <!-- Product Grid -->
+    <div id="aurex-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {products.map((product) => (
+        <div class="aurex-item" data-category={product.category_slug}>
+          <ProductCard product={product} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script is:inline>
+    const tabs = document.querySelectorAll('.aurex-cat-tab');
+    const items = document.querySelectorAll('.aurex-item');
+
+    function filterTech(slug) {
+      tabs.forEach(tab => {
+        if (tab.getAttribute('data-slug') === slug) {
+          tab.classList.add('bg-[#06b6d4]', 'text-black', 'border-[#06b6d4]');
+          tab.classList.remove('bg-[#0b1220]', 'text-[#94a3b8]', 'border-[#1e293b]');
+        } else {
+          tab.classList.remove('bg-[#06b6d4]', 'text-black', 'border-[#06b6d4]');
+          tab.classList.add('bg-[#0b1220]', 'text-[#94a3b8]', 'border-[#1e293b]');
+        }
+      });
+
+      items.forEach(item => {
+        const cat = item.getAttribute('data-category');
+        if (slug === 'all' || cat === slug) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const slug = tab.getAttribute('data-slug');
+        filterTech(slug);
+        const url = new URL(window.location);
+        if (slug === 'all') {
+          url.searchParams.delete('category');
+        } else {
+          url.searchParams.set('category', slug);
+        }
+        window.history.pushState({}, '', url);
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    filterTech(params.get('category') || 'all');
+  </script>
+</Layout>

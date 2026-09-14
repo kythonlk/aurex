@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Stores & Technical Support | Aurex Sri Lanka">
+  <div class="bg-[#070b14] py-12 border-b border-slate-800 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">// CONTACT AUREX</span>
+      <h1 class="font-heading text-3xl sm:text-4xl font-black text-white mt-1">Retail Stores & Tech Support</h1>
+      <p class="text-xs sm:text-sm text-slate-400 mt-2 max-w-xl mx-auto">
+        Visit our flagship retail electronics stores or contact our hardware specialist desk.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- Store Info -->
+    <div class="space-y-6 font-mono text-xs text-slate-400">
+      <div class="space-y-1">
+        <h3 class="font-heading text-lg font-bold text-white uppercase tracking-wider">// Colombo Experience Hub</h3>
+        <p>No. 248, Galle Road, Bambalapitiya, Colombo 04</p>
+        <p class="text-cyan-400">Mon - Sat: 9:30 AM - 8:00 PM | Sun: 10:00 AM - 6:00 PM</p>
+      </div>
+
+      <div class="space-y-1">
+        <h3 class="font-heading text-sm font-bold text-white uppercase tracking-wider">// Technical Hotline & Support</h3>
+        <p>General Inquiries: +94 11 450 7800</p>
+        <p class="text-cyan-400">WhatsApp Dispatch Desk: +94 77 345 6789</p>
+        <p>Corporate Email: support@aurex.lk</p>
+      </div>
+
+      <div class="p-4 bg-[#0f172a] rounded-xl border border-slate-800 space-y-2">
+        <div class="text-white font-bold">Islandwide Courier Dispatch Hub</div>
+        <p>Orders confirmed before 2:00 PM are dispatched same-day for next-day delivery in Western Province and within 48h across all other Sri Lankan districts.</p>
+      </div>
+    </div>
+
+    <!-- Technical Inquiry Form -->
+    <div class="bg-[#0f172a] p-8 rounded-xl border border-slate-800 shadow-xl space-y-4">
+      <h3 class="font-heading text-base font-bold text-white uppercase tracking-wider">// Hardware Consultation Request</h3>
+      <form id="aurex-contact-form" class="space-y-3 font-mono text-xs">
+        <div>
+          <label class="block text-slate-300 uppercase mb-1">Customer Name</label>
+          <input type="text" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-cyan-400 focus:outline-hidden" placeholder="Chathura Gamage" />
+        </div>
+        <div>
+          <label class="block text-slate-300 uppercase mb-1">Phone Number (Sri Lanka)</label>
+          <input type="tel" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-cyan-400 focus:outline-hidden" placeholder="+94 77 ..." />
+        </div>
+        <div>
+          <label class="block text-slate-300 uppercase mb-1">Hardware Department</label>
+          <select class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-cyan-400 focus:outline-hidden">
+            <option>Laptops & PC Workstation Quote</option>
+            <option>Smartphone TRCSL & Warranty Check</option>
+            <option>Audio Gear & ANC Inquiry</option>
+            <option>Corporate Bulk Electronics Procurement</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-slate-300 uppercase mb-1">Technical Requirements</label>
+          <textarea rows="3" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-cyan-400 focus:outline-hidden" placeholder="Describe the specifications you need..."></textarea>
+        </div>
+        <button type="submit" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold uppercase tracking-wider rounded-lg transition-colors">
+          Send Technical Request
+        </button>
+        <div id="aurex-contact-success" class="hidden text-cyan-400 text-center pt-2">
+          ✓ Request logged. Our tech team will reply via WhatsApp/call shortly.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script is:inline>
+    document.getElementById('aurex-contact-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('aurex-contact-success')?.classList.remove('hidden');
+      e.target.reset();
+    });
+  </script>
+</Layout>
