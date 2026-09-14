@@ -21,25 +21,21 @@ export interface TechProduct {
 export const AUREX_PRODUCTS: TechProduct[] = [
   {
     id: "aur-prod-1",
-    title: "Aurex Pulse Pro ANC Wireless Studio Headphones",
-    slug: "aurex-pulse-pro-anc-headphones",
-    sku: "AUR-HPH-01",
-    description: "Industry-leading 45dB hybrid active noise cancellation with custom-tuned 40mm titanium diaphragm drivers. Features 60-hour marathon battery life, Bluetooth 5.4 multi-point connectivity, ultra-comfortable plush protein memory foam ear cushions, and transparency pass-through mode.",
-    short_description: "45dB hybrid ANC studio headphones with 60h battery life and titanium drivers.",
-    price: 42500,
-    compare_at_price: 49900,
-    category: "Audio & Headphones",
-    category_slug: "audio-headphones",
-    tags: ["audio", "headphones", "anc", "bluetooth", "wireless"],
+    title: "Aurex BreezeMax 16\" Smart Stand Fan",
+    slug: "aurex-breezemax-smart-stand-fan",
+    sku: "AUR-FAN-01",
+    description: "A quiet, powerful everyday fan with five speed settings, a wide oscillation range and an energy-efficient copper motor built for Sri Lankan homes.",
+    short_description: "16-inch quiet cooling with 5 speeds, remote control and wide-angle oscillation.",
+    price: 18900,
+    compare_at_price: 21900,
+    category: "Fans & Cooling",
+    category_slug: "fans-cooling",
+    tags: ["fan", "cooling", "home", "appliance"],
     specs: [
-      { label: "Active Noise Cancellation", value: "45dB Hybrid Dual-Mic ANC" },
-      { label: "Driver Size", value: "40mm Titanium Composite" },
-      { label: "Battery Life", value: "Up to 60 Hours (45h with ANC)" },
-      { label: "Connectivity", value: "Bluetooth 5.4 & 3.5mm Hi-Res Audio" },
-      { label: "Fast Charging", value: "10 mins charge = 5 hours playtime" }
+      { label: "Fan size", value: "16 inch" }, { label: "Speed settings", value: "5 speeds" }, { label: "Control", value: "Remote + touch panel" }
     ],
     images: [
-      { id: "img1", url: "/images/headphones.jpg", alt_text: "Aurex Pulse Pro ANC Wireless Studio Headphones", is_primary: true }
+      { id: "img1", url: "/images/appliance-hero.png", alt_text: "Aurex BreezeMax smart stand fan", is_primary: true }
     ],
     rating: 4.95,
     review_count: 64,
@@ -48,25 +44,21 @@ export const AUREX_PRODUCTS: TechProduct[] = [
   },
   {
     id: "aur-prod-2",
-    title: "Aurex Cyberwatch Elite AMOLED Titanium Smartwatch",
-    slug: "aurex-cyberwatch-elite-smartwatch",
-    sku: "AUR-WTC-01",
-    description: "Aerospace-grade CNC-machined titanium bezel housing a brilliant 1.43-inch sapphire crystal AMOLED always-on display with 1000-nit peak brightness. Equipped with dual-band multi-GNSS satellite tracking, continuous SpO2/ECG heart monitoring, and 10ATM military-grade water resistance.",
-    short_description: "Titanium sapphire AMOLED smartwatch with dual-band GPS and ECG tracking.",
-    price: 38900,
-    compare_at_price: 46000,
-    category: "Smart Wearables",
-    category_slug: "smart-wearables",
-    tags: ["smartwatch", "wearables", "fitness", "titanium", "gps"],
+    title: "Aurex ChefMate 1.8L Digital Rice Cooker",
+    slug: "aurex-chefmate-digital-rice-cooker",
+    sku: "AUR-RIC-01",
+    description: "A family-sized digital rice cooker with intelligent heat control, a non-stick inner pot and automatic keep-warm for effortless daily meals.",
+    short_description: "Family-sized rice cooker with smart cooking presets and 12-hour keep-warm.",
+    price: 24500,
+    compare_at_price: 27900,
+    category: "Kitchen Appliances",
+    category_slug: "kitchen-appliances",
+    tags: ["rice cooker", "kitchen", "appliance"],
     specs: [
-      { label: "Display", value: "1.43\" Sapphire AMOLED (466x466, 1000 nits)" },
-      { label: "Body Materials", value: "Aerospace Titanium & Ceramic Back" },
-      { label: "Water Resistance", value: "10 ATM (100m Dive & Swimming)" },
-      { label: "Sensors", value: "ECG, Continuous SpO2, Heart Rate, VO2 Max" },
-      { label: "Battery Life", value: "14 Days Typical Use / 7 Days Heavy" }
+      { label: "Capacity", value: "1.8 litres / 10 cups" }, { label: "Programs", value: "8 cooking presets" }, { label: "Inner pot", value: "Non-stick ceramic" }
     ],
     images: [
-      { id: "img2", url: "/images/smartwatch.jpg", alt_text: "Aurex Cyberwatch Elite AMOLED Smartwatch", is_primary: true }
+      { id: "img2", url: "/images/appliance-hero.png", alt_text: "Aurex ChefMate digital rice cooker", is_primary: true }
     ],
     rating: 4.88,
     review_count: 51,
@@ -75,69 +67,44 @@ export const AUREX_PRODUCTS: TechProduct[] = [
   },
   {
     id: "aur-prod-3",
-    title: "Aurex Blade Pro 14 OLED M2 Ultrabook Laptop",
-    slug: "aurex-blade-pro-14-oled-laptop",
-    sku: "AUR-LPT-01",
-    description: "Precision-engineered unibody aluminum chassis weighing just 1.2kg. Powered by a high-efficiency 12-core processor with integrated AI acceleration, 32GB LPDDR5X RAM, 1TB Gen4 NVMe SSD, and a factory-calibrated 14-inch 2.8K 120Hz OLED HDR display (100% DCI-P3).",
-    short_description: "1.2kg ultrabook with 2.8K 120Hz OLED display, 32GB RAM, and 18h all-day battery.",
-    price: 385000,
-    compare_at_price: 420000,
-    category: "Laptops & Computing",
-    category_slug: "laptops-computing",
-    tags: ["laptops", "ultrabook", "oled", "computing", "creator"],
+    title: "Aurex HeatPro 42L Countertop Oven",
+    slug: "aurex-heatpro-countertop-oven",
+    sku: "AUR-OVN-01",
+    description: "A versatile 42-litre electric oven for roasting, baking, grilling and toasting, with precise temperature control and a convection setting.",
+    short_description: "42L multi-function oven for baking, roasting, grilling and family dinners.",
+    price: 42900,
+    compare_at_price: 48500,
+    category: "Kitchen Appliances",
+    category_slug: "kitchen-appliances",
+    tags: ["oven", "kitchen", "appliance", "baking"],
     specs: [
-      { label: "Display", value: "14.0\" 2.8K (2880x1800) 120Hz OLED HDR 600" },
-      { label: "Memory", value: "32GB LPDDR5X 7500MHz High-Speed" },
-      { label: "Storage", value: "1TB PCIe Gen4 NVMe M.2 SSD" },
-      { label: "Weight", value: "1.28 kg (Ultra-portable Unibody)" },
-      { label: "Ports", value: "2x Thunderbolt 4, 1x USB-A 3.2, HDMI 2.1, 3.5mm" }
+      { label: "Capacity", value: "42 litres" }, { label: "Temperature", value: "100–230°C" }, { label: "Functions", value: "Bake, grill, toast, convection" }
     ],
     images: [
-      { id: "img3", url: "/images/laptop.jpg", alt_text: "Aurex Blade Pro 14 OLED Laptop", is_primary: true }
+      { id: "img3", url: "/images/appliance-hero.png", alt_text: "Aurex HeatPro countertop oven", is_primary: true }
     ],
     rating: 5.0,
     review_count: 28,
     warranty: "2-Year Official Sri Lanka Warranty + 1-Year Accidental Cover",
     is_featured: true
   }
+  ,{
+    id: "aur-prod-4", title: "Aurex NovaBook 14 Everyday Laptop", slug: "aurex-novabook-14-laptop", sku: "AUR-LPT-02",
+    description: "A reliable, slim laptop for work, study and streaming, with a bright full-HD screen and all-day battery.", short_description: "Lightweight 14-inch laptop for work, study and home entertainment.", price: 169900, compare_at_price: 184900,
+    category: "Tech & Computing", category_slug: "tech-computing", tags: ["laptop", "tech", "computing"],
+    specs: [{ label: "Display", value: "14-inch Full HD" }, { label: "Memory", value: "8GB RAM" }, { label: "Storage", value: "512GB SSD" }],
+    images: [{ id: "img4", url: "/images/laptop.jpg", alt_text: "Aurex NovaBook laptop", is_primary: true }], rating: 4.9, review_count: 35, warranty: "2-Year Official Sri Lanka Warranty", is_featured: true
+  },
+  {
+    id: "aur-prod-5", title: "Aurex SoundGo Mini Wireless Earbuds", slug: "aurex-soundgo-mini-earbuds", sku: "AUR-AUD-02",
+    description: "Pocket-friendly wireless earbuds with clear calls, comfortable fit and a compact charging case.", short_description: "Everyday wireless earbuds with clear calls and 24-hour case battery.", price: 12900, compare_at_price: 14900,
+    category: "Tech & Computing", category_slug: "tech-computing", tags: ["audio", "tech", "earbuds"],
+    specs: [{ label: "Battery", value: "24 hours with case" }, { label: "Connectivity", value: "Bluetooth 5.3" }],
+    images: [{ id: "img5", url: "/images/headphones.jpg", alt_text: "Aurex SoundGo earbuds", is_primary: true }], rating: 4.8, review_count: 46, warranty: "1-Year Official Sri Lanka Warranty", is_featured: true
+  }
 ];
 
 export async function getAurexProducts(): Promise<TechProduct[]> {
-  try {
-    const res = await fetch("http://localhost:8080/api/v1/products", {
-      headers: { "X-Store-ID": "store_aurex" },
-      signal: AbortSignal.timeout(1000)
-    });
-    if (res.ok) {
-      const data = await res.json();
-      if (data && data.data && data.data.length > 0) {
-        return data.data.map((p: any) => {
-          const fallback = AUREX_PRODUCTS.find(ap => ap.slug === p.slug || ap.title === p.title);
-          return {
-            id: p.id,
-            title: p.title,
-            slug: p.slug,
-            sku: p.sku || "AUR-01",
-            description: p.description || fallback?.description || "",
-            short_description: p.short_description || fallback?.short_description || "",
-            price: Number(p.price) || fallback?.price || 38900,
-            compare_at_price: p.compare_at_price ? Number(p.compare_at_price) : fallback?.compare_at_price,
-            category: fallback?.category || "Flagship Electronics",
-            category_slug: fallback?.category_slug || "electronics",
-            tags: p.tags || fallback?.tags || [],
-            specs: fallback?.specs || [{ label: "Warranty", value: "2-Year Official Sri Lanka" }],
-            images: fallback?.images || [{ id: "img", url: "/images/headphones.jpg", alt_text: p.title, is_primary: true }],
-            rating: p.avg_rating || fallback?.rating || 4.9,
-            review_count: p.review_count || fallback?.review_count || 30,
-            warranty: fallback?.warranty || "2-Year Official Sri Lanka Warranty",
-            is_featured: p.is_featured ?? true
-          };
-        });
-      }
-    }
-  } catch (e) {
-    // offline/fallback mode
-  }
   return AUREX_PRODUCTS;
 }
 

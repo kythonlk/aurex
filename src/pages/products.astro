@@ -5,22 +5,22 @@ import { getAurexProducts } from '../lib/store';
 
 const products = await getAurexProducts();
 const categories = [
-  { name: "All Flagship Hardware", slug: "all" },
-  { name: "Audio & Headphones", slug: "audio-headphones" },
-  { name: "Smart Wearables", slug: "smart-wearables" },
-  { name: "Laptops & Computing", slug: "laptops-computing" },
+  { name: "All Products", slug: "all" },
+  { name: "Fans & Cooling", slug: "fans-cooling" },
+  { name: "Kitchen Appliances", slug: "kitchen-appliances" },
+  { name: "Tech & Computing", slug: "tech-computing" },
 ];
 ---
 
-<Layout title="Hardware Directory | Aurex Sri Lanka">
-  <div class="bg-[#060a14] py-14 border-b border-[#1e293b]">
+<Layout title="Shop Appliances & Tech | Aurex Sri Lanka">
+  <div class="bg-[#f6f1e8] py-14 border-b border-[#e7e4de]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <span class="text-xs uppercase tracking-[0.25em] font-mono text-[#06b6d4] font-bold">DIRECTORY & ARCHIVE</span>
-      <h1 class="font-tech text-4xl sm:text-5xl text-white font-black mt-2">
-        Flagship Electronics Catalog
+      <span class="text-xs uppercase tracking-[0.25em] text-[#ef5b2a] font-bold">FOR EVERY ROOM</span>
+      <h1 class="font-heading text-4xl sm:text-5xl text-[#172640] font-black mt-2">
+        Appliances & tech, made simple
       </h1>
-      <p class="text-xs text-[#94a3b8] max-w-xl mx-auto mt-3">
-        Engineered for precision and endurance. All devices are factory sealed with 2-Year Official Sri Lanka Warranty.
+      <p class="text-sm text-[#687386] max-w-xl mx-auto mt-3">
+        Everyday essentials for your kitchen, home and workspace, all backed by dependable local support.
       </p>
     </div>
   </div>
@@ -31,7 +31,7 @@ const categories = [
       {categories.map((cat) => (
         <button
           type="button"
-          class="aurex-cat-tab px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all border border-[#1e293b] bg-[#0b1220] text-[#94a3b8] hover:border-[#06b6d4] hover:text-white"
+          class="aurex-cat-tab px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all border border-[#e7e4de] bg-white text-[#687386] hover:border-[#ef5b2a] hover:text-[#172640]"
           data-slug={cat.slug}
         >
           {cat.name}
@@ -56,11 +56,11 @@ const categories = [
     function filterTech(slug) {
       tabs.forEach(tab => {
         if (tab.getAttribute('data-slug') === slug) {
-          tab.classList.add('bg-[#06b6d4]', 'text-black', 'border-[#06b6d4]');
-          tab.classList.remove('bg-[#0b1220]', 'text-[#94a3b8]', 'border-[#1e293b]');
+          tab.classList.add('bg-[#ef5b2a]', 'text-white', 'border-[#ef5b2a]');
+          tab.classList.remove('bg-white', 'text-[#687386]', 'border-[#e7e4de]');
         } else {
-          tab.classList.remove('bg-[#06b6d4]', 'text-black', 'border-[#06b6d4]');
-          tab.classList.add('bg-[#0b1220]', 'text-[#94a3b8]', 'border-[#1e293b]');
+          tab.classList.remove('bg-[#ef5b2a]', 'text-white', 'border-[#ef5b2a]');
+          tab.classList.add('bg-white', 'text-[#687386]', 'border-[#e7e4de]');
         }
       });
 
